@@ -32,15 +32,24 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  
- function validateInput(input) {
-    
-    if (input === "") {
+ function validateInput(document) {
+    let pilotInput = document.querySelector("input[name=pilotName]");
+    let pilot = pilotInput.value;
+    let copilot = document.getElementById("copilotName").value;
+    let fuel = document.getElementById("fuelLevel").value;
+    let cargo = document.getElementById("cargoMass").value;
+
+
+    if (pilot === "") {
         return "Empty"
+    } 
+    if (copilot === "") {
+        return "Empty"
+    } 
+    if(isNaN(Number(fuel))) {
+        return "Not a Number"
     }
-    if(!isNaN(Number(input))) {
-        return "Is a Number"
-    }
-    if(isNaN(Number(input))) {
+    if(isNaN(Number(cargo))) {
         return "Not a Number"
     }
  }
@@ -52,7 +61,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     const copilotStatus = document.getElementById("copilotStatus");
     const fuelStatus = document.getElementById("fuelStatus");
     const cargoStatus = document.getElementById("cargoStatus");
-
+   
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
    
@@ -84,14 +93,20 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  async function myFetch() {
      let planetsReturned;
  
-     planetsReturned = await fetch().then( function(response) {
-         });
+     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+         if (response.status >= 400) {
+            throw new Error("bad response");
+         }else {return response.json()}
+         
+         
+ });
  
      return planetsReturned;
  }
  
  function pickPlanet(planets) {
-    return planets[Math.floor(Math.random(planets.length))];
+    let index = Math.floor(Math.random()*planets.length);
+    return planets[index];
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
