@@ -32,26 +32,26 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  
- function validateInput(document) {
-    let pilotInput = document.querySelector("input[name=pilotName]");
-    let pilot = pilotInput.value;
-    let copilot = document.getElementById("copilotName").value;
-    let fuel = document.getElementById("fuelLevel").value;
-    let cargo = document.getElementById("cargoMass").value;
+ function validateInput(string) {
+    
+    // let pilot = document.getElementById("pilotName");
+    // let copilot = document.getElementById("copilotName").value;
+    // let fuel = document.getElementById("fuelLevel").value;
+    // let cargo = document.getElementById("cargoMass").value;
 
 
-    if (pilot === "") {
-        return "Empty"
+    if (string === "") {
+        return "Empty";
     } 
-    if (copilot === "") {
-        return "Empty"
-    } 
-    if(isNaN(Number(fuel))) {
-        return "Not a Number"
+    // if (string === "") {
+    //     return "Empty"
+    //} 
+    if(!isNaN(Number(string))) {
+        return "Is a Number";
+    }else {return "Not a Number";
     }
-    if(isNaN(Number(cargo))) {
-        return "Not a Number"
-    }
+    
+  
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {

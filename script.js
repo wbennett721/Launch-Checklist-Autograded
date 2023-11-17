@@ -23,7 +23,6 @@ window.addEventListener("load", function() {
     })
     
     let list = document.getElementById("faultyItems");
-    alert(list.getElementById("pilotStatus")).value;
     list.style.visibility = "hidden";
     let form = document.querySelector("form");
     form.addEventListener("submit", function(event) {
